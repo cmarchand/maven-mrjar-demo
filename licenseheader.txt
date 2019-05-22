@@ -1,0 +1,3 @@
+/*
+ * Copyright Editions Lefebvre-Sarrut 2019
+ */
