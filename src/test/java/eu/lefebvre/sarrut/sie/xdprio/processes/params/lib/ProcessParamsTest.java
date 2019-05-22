@@ -23,6 +23,5 @@ public class ProcessParamsTest {
         URI uri = testFile.toURI();
         pp.setParameter(ProcessParams.WORKING_DIR_PROPERTY, uri.toString());
         assertEquals(uri, pp.getWorkingDir());
-    }
-    
+    }    
 }
