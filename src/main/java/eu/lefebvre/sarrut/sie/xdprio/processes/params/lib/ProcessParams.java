@@ -50,15 +50,18 @@ public class ProcessParams {
      * @return Working directory
      */
     public URI getWorkingDir() {
+        if(workingDir==null) return null;
         return workingDir.toURI();
     }
     
     void setParameter(String key, String value) {
         parameters.put(key, value);
-        try {
-            workingDir = new File(new URI(value));
-        } catch(URISyntaxException ex) {
-            LOGGER.error(value+":", ex);
+        if(WORKING_URI_PROPERTY.equals(key)) {
+            try {
+                workingDir = new File(new URI(value));
+            } catch(URISyntaxException ex) {
+                LOGGER.error(value+":", ex);
+            }
         }
     }
 }

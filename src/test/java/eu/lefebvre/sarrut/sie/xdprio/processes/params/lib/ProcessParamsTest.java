@@ -23,5 +23,13 @@ public class ProcessParamsTest {
         URI uri = testFile.toURI();
         pp.setParameter(ProcessParams.WORKING_URI_PROPERTY, uri.toString());
         assertEquals(uri, pp.getWorkingDir());
-    }    
+    }
+    
+    @Test
+    public void testNonUriParam() throws Exception {
+        ProcessParams pp = new ProcessParams();
+        pp.setParameter("toto", "pouet");
+        assertEquals("toto has not pouet has value", "pouet", pp.getParameterValue("toto"));
+        assertNull("working dir is not null", pp.getWorkingDir());
+    }
 }
