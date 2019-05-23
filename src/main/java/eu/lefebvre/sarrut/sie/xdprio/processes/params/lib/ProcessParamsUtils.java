@@ -12,7 +12,6 @@ import java.net.URI;
 import java.nio.charset.Charset;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.Properties;
 
 /**
@@ -21,7 +20,7 @@ import java.util.Properties;
  */
 public class ProcessParamsUtils {
     private Properties currentPP;
-    private DateTimeFormatter formatter;
+    private final DateTimeFormatter formatter;
     
     public ProcessParamsUtils() {
         super();
@@ -39,9 +38,9 @@ public class ProcessParamsUtils {
         Properties props = new Properties();
         props.loadFromXML(new FileInputStream(f));
         ProcessParams ret = new ProcessParams();
-        for(String key: props.stringPropertyNames()) {
+        props.stringPropertyNames().forEach((key) -> {
             ret.setParameter(key, props.getProperty(key));
-        }
+        });
         return ret;
     }
     

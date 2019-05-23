@@ -22,9 +22,10 @@ import org.apache.logging.log4j.Logger;
  */
 public class ProcessParams {
     /**
-     * Parameter name for working directory
+     * Parameter name for working directory.
+     * Value must be a valid URI, i.e. {@code file:/path/to/working/directory}
      */
-    public static final String WORKING_DIR_PROPERTY = "working.directory";
+    public static final String WORKING_URI_PROPERTY = "working.directory";
     
     private static final Logger LOGGER = LogManager.getLogger(ProcessParams.class);
     private File workingDir;
@@ -54,16 +55,10 @@ public class ProcessParams {
     
     void setParameter(String key, String value) {
         parameters.put(key, value);
-        if(WORKING_DIR_PROPERTY.equals(key)) {
-            if(value.contains(":")) {
-                try {
-                    workingDir = new File(new URI(value));
-                } catch(URISyntaxException ex) {
-                    LOGGER.error(value+"::", ex);
-                }
-            } else {
-                workingDir = new File(value);
-            }
+        try {
+            workingDir = new File(new URI(value));
+        } catch(URISyntaxException ex) {
+            LOGGER.error(value+":", ex);
         }
     }
 }

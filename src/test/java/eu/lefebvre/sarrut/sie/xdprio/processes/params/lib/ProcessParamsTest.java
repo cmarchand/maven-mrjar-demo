@@ -21,7 +21,7 @@ public class ProcessParamsTest {
         File targetDir = TestUtils.getTargetDirectory();
         File testFile = new File(targetDir, "test.xml");
         URI uri = testFile.toURI();
-        pp.setParameter(ProcessParams.WORKING_DIR_PROPERTY, uri.toString());
+        pp.setParameter(ProcessParams.WORKING_URI_PROPERTY, uri.toString());
         assertEquals(uri, pp.getWorkingDir());
     }    
 }
