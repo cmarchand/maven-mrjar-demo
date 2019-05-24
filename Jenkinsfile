@@ -35,6 +35,12 @@ pipeline {
                 mvnDeploy()
             }
         }
+
+        stage('Sonar') {
+            steps {
+                withSonarQubeEnv('sonar')
+            }
+        }
     }
  
     post {
