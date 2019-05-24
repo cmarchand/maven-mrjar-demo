@@ -39,7 +39,7 @@ pipeline {
         stage('Sonar') {
             steps {
                 withSonarQubeEnv('sonar') {
-                    sh 'mvn sonar:sonar'
+                    sh 'mvn sonar:sonar -Dsonar.exclusions=**/module-info.java'
                 }
             }
         }
