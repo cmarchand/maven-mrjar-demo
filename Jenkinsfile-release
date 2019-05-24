@@ -1,0 +1,50 @@
+@Library('jenkins-shared-libraries') _
+
+import static eu.els.ci.MvnVersion.MVN_3_6_0
+import static eu.els.ci.JdkVersion.JDK8
+import static eu.els.ci.MvnUtils.MAJOR_INCREMENT
+import static eu.els.ci.MvnUtils.MINOR_INCREMENT
+import static eu.els.ci.MvnUtils.PATCH_INCREMENT
+
+pipeline {
+    agent { label 'slave_linux_sie' }
+
+    tools {
+        maven MVN_3_6_0.get()
+        jdk JDK8.get()
+    }
+
+    options {
+        disableConcurrentBuilds()
+        buildDiscarder(logRotator(numToKeepStr: '2'))
+    }
+
+    parameters {
+        string(name: 'TAG_VERSION', defaultValue: '', description: 'Le numéro de version de la release')
+        string(name: 'DEV_VERSION', defaultValue: '', description: 'Le numéro de la prochaine version (mettre le -SNAPSHOT)')
+    }
+
+    stages {
+        stage('Clean') {
+            steps {
+                deleteDir()
+            }
+        }
+
+        stage('Clone') {
+            steps {
+                 git(
+                     url: "https://bitbucket.org/elsgestion/sie-els-mcqueen-xdprio-processes-params.git",
+                     credentialsId: '3b0173e2-11c5-4152-a8a1-f51fdbe80e2d',
+                     branch: env.BRANCH_NAME
+                )
+            }
+        }
+
+        stage('Release') {
+            steps {
+                mvnRelease(tagVersion: TAG_VERSION, devVersion: DEV_VERSION)
+            }
+        }
+    }
+}

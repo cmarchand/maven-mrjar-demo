@@ -7,8 +7,11 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import top.marchand.maven.test.utils.TestUtils;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.nio.charset.Charset;
+import javax.xml.parsers.SAXParserFactory;
 import nu.xom.Builder;
 import nu.xom.Document;
 import nu.xom.Element;
@@ -18,6 +21,10 @@ import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
 
 /**
  *
@@ -47,7 +54,15 @@ public class ProcessParamsUtilsTest {
         ppu.addParameter("toto", "pouet");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ppu.serializeParams(baos);
-        Builder builder = new Builder();
+        XMLReader reader = SAXParserFactory.newInstance().newSAXParser().getXMLReader();
+        reader.setEntityResolver(new EntityResolver() {
+            @Override
+            public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
+                InputStream is = getClass().getResourceAsStream("/properties.dtd");
+                return new InputSource(is);
+            }
+        });
+        Builder builder = new Builder(reader);
         Document doc = builder.build(new ByteArrayInputStream(baos.toByteArray()));
         Element rootElement = doc.getRootElement();
         assertEquals("Root element isn't a properties", "properties", rootElement.getLocalName());
