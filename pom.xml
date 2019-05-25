@@ -216,9 +216,9 @@
             <configuration>
               <source>1.8</source>
               <target>1.8</target>
-              <excludes>
-                <exclude>module-info.java</exclude>
-              </excludes>
+<!--              <excludes>-->
+<!--                <exclude>module-info.java</exclude>-->
+<!--              </excludes>-->
             </configuration>
           </plugin>
         </plugins>
