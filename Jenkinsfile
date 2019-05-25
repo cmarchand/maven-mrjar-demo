@@ -39,7 +39,7 @@ pipeline {
         stage('Sonar') {
             steps {
                 withSonarQubeEnv('sonar') {
-                    sh 'mvn sonar:sonar -Dsonar.exclusions=**/module-info.java'
+                    sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test integration-test invoker:run org.jacoco:jacoco-maven-plugin:report org.pitest:pitest-maven:mutationCoverage sonar:sonar -Dmaven.test.failure.ignore=true -Dsonar.exclusions=**/module-info.java -Dsonar.branch.name=${BRANCH_NAME} -P sonar'
                 }
             }
         }
