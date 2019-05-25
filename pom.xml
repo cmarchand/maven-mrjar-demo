@@ -216,32 +216,40 @@
             <executions>
               <execution>
                 <id>jdk11-compile</id>
+                <phase>none</phase>
+              </execution>
+              <execution>
+                <id>jdk11-testCompile</id>
+                <phase>none</phase>
+              </execution>
+              <execution>
+                <id>jdk8-compile</id>
                 <phase>compile</phase>
                 <goals>
                   <goal>compile</goal>
                 </goals>
                 <configuration>
-                  <multiReleaseOutput>false</multiReleaseOutput>
-                  <release></release>
+                  <source>1.8</source>
+                  <target>1.8</target>
+                  <excludes>
+                    <exclude>module-info.java</exclude>
+                  </excludes>
                 </configuration>
               </execution>
               <execution>
-                <id>jdk11-testCompile</id>
+                <id>jdk8-testCompile</id>
                 <phase>test-compile</phase>
                 <goals>
                   <goal>testCompile</goal>
                 </goals>
                 <configuration>
-                  <multiReleaseOutput>false</multiReleaseOutput>
-                  <release></release>
+                  <source>1.8</source>
+                  <target>1.8</target>
                 </configuration>
-              </execution>
-              <execution>
-                <id>jdk8-compile</id>
-                <phase>none</phase>
               </execution>
             </executions>
             <configuration>
+              <release></release>
               <multiReleaseOutput>false</multiReleaseOutput>
               <showDeprecation>true</showDeprecation>
             </configuration>
