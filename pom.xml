@@ -234,7 +234,7 @@
               </execution>
             </executions>
             <configuration>
-              <multiReleaseOutput>false</showDeprecation>
+              <multiReleaseOutput>false</multiReleaseOutput>
               <showDeprecation>true</showDeprecation>
             </configuration>
           </plugin>
