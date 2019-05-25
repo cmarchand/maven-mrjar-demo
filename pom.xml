@@ -220,6 +220,10 @@
                 <goals>
                   <goal>compile</goal>
                 </goals>
+                <configuration>
+                  <multiReleaseOutput>false</multiReleaseOutput>
+                  <release></release>
+                </configuration>
               </execution>
               <execution>
                 <id>jdk11-testCompile</id>
@@ -227,6 +231,10 @@
                 <goals>
                   <goal>testCompile</goal>
                 </goals>
+                <configuration>
+                  <multiReleaseOutput>false</multiReleaseOutput>
+                  <release></release>
+                </configuration>
               </execution>
               <execution>
                 <id>jdk8-compile</id>
