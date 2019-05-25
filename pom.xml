@@ -220,9 +220,6 @@
                 <goals>
                   <goal>compile</goal>
                 </goals>
-                <configuration>
-                  <release>11</release>
-                </configuration>
               </execution>
               <execution>
                 <id>jdk11-testCompile</id>
@@ -230,9 +227,6 @@
                 <goals>
                   <goal>testCompile</goal>
                 </goals>
-                <configuration>
-                  <release>11</release>
-                </configuration>
               </execution>
               <execution>
                 <id>jdk8-compile</id>
@@ -240,9 +234,6 @@
               </execution>
             </executions>
             <configuration>
-              <configuration>
-                <release>11</release>
-              </configuration>
               <showDeprecation>true</showDeprecation>
             </configuration>
           </plugin>
