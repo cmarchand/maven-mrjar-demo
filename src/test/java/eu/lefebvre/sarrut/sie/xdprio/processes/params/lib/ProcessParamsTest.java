@@ -14,11 +14,11 @@ import static org.junit.Assert.*;
  * @author cmarchand
  */
 public class ProcessParamsTest {
-    
+
     @Test
     public void testWorkingDir() throws Exception {
         ProcessParams pp = new ProcessParams();
-        File targetDir = TestUtils.getTargetDirectory();
+        File targetDir = new File(new File(TestUtils.class.getClassLoader().getResource("").getFile()).getParentFile().getParentFile(), "target");
         File testFile = new File(targetDir, "test.xml");
         URI uri = testFile.toURI();
         pp.setParameter(ProcessParams.WORKING_URI_PROPERTY, uri.toString());

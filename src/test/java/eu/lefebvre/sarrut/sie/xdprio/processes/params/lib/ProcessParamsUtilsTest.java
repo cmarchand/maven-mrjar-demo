@@ -37,7 +37,7 @@ public class ProcessParamsUtilsTest {
     @BeforeClass
     public static void before() throws Exception {
         System.out.println("Before");
-        File targetDir = TestUtils.getTargetDirectory();
+        File targetDir = new File(new File(TestUtils.class.getClassLoader().getResource("").getFile()).getParentFile().getParentFile(), "target");
         File testFile = new File(targetDir, "test.xml");
         testUri = testFile.toURI();
     }
