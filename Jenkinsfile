@@ -30,6 +30,12 @@ pipeline {
             }
         }
  
+        stage('Test JDK11') {
+            steps {
+                sh 'mvn clean test -P test11'
+            }
+        }
+
         stage('Build') {
             steps {
                 mvnDeploy()
