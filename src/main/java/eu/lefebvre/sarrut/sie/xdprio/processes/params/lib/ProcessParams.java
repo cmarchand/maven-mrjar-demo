@@ -58,7 +58,11 @@ public class ProcessParams {
         parameters.put(key, value);
         if(WORKING_URI_PROPERTY.equals(key)) {
             try {
-                workingDir = new File(new URI(value));
+                if(value.startsWith("file:")) {
+                    workingDir = new File(new URI(value));
+                } else {
+                    workingDir = new File(value);
+                }
             } catch(URISyntaxException ex) {
                 LOGGER.error(value+":", ex);
             }
