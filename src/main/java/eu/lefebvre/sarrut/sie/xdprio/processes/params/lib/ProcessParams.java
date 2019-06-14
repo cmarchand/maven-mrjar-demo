@@ -50,7 +50,9 @@ public class ProcessParams {
      * @return Working directory
      */
     public URI getWorkingDir() {
-        if(workingDir==null) return null;
+        if(workingDir==null) {
+            return null;
+        }
         return workingDir.toURI();
     }
     
