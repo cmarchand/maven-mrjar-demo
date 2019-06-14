@@ -96,6 +96,10 @@
             <configuration>
               <release>11</release>
               <multiReleaseOutput>true</multiReleaseOutput>
+              <compileSourceRoots>
+                <compileSourceRoot>src/main/java</compileSourceRoot>
+                <compileSourceRoot>src/main/java11</compileSourceRoot>
+              </compileSourceRoots>
             </configuration>
           </execution>
           <execution>
@@ -114,8 +118,11 @@
             <phase>compile</phase>
             <goals><goal>compile</goal></goals>
             <configuration>
-              <source>1.8</source>
-              <target>1.8</target>
+              <release>8</release>
+              <compileSourceRoots>
+                <compileSourceRoot>src/main/java</compileSourceRoot>
+                <compileSourceRoot>src/main/java8</compileSourceRoot>
+              </compileSourceRoots>
               <excludes>
                 <exclude>module-info.java</exclude>
               </excludes>
