@@ -30,9 +30,23 @@ pipeline {
             }
         }
  
+        stage('Test JDK11') {
+            steps {
+                sh 'mvn clean test -P test11'
+            }
+        }
+
         stage('Build') {
             steps {
                 mvnDeploy()
+            }
+        }
+
+        stage('Sonar') {
+            steps {
+                withSonarQubeEnv('sonar-entreprise') {
+                    sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package integration-test invoker:run org.jacoco:jacoco-maven-plugin:report sonar:sonar -Dmaven.test.failure.ignore=true -Dsonar.exclusions=**/module-info.java -Dsonar.branch.name=${BRANCH_NAME} -P sonar'
+                }
             }
         }
     }
