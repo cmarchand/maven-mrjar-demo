@@ -72,6 +72,9 @@
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.1</version>
+          <configuration>
+            <compilerReuseStrategy>alwaysNew</compilerReuseStrategy>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
@@ -89,7 +92,8 @@
         <executions>
           <execution>
             <id>jdk11-compile</id>
-            <phase>compile</phase>
+            <!--<phase>compile</phase>-->
+            <phase>none</phase>
             <goals>
               <goal>compile</goal>
             </goals>
@@ -104,7 +108,8 @@
           </execution>
           <execution>
             <id>jdk11-testCompile</id>
-            <phase>test-compile</phase>
+            <!--<phase>test-compile</phase>-->
+            <phase>none</phase>
             <goals>
               <goal>testCompile</goal>
             </goals>
@@ -118,7 +123,9 @@
             <phase>compile</phase>
             <goals><goal>compile</goal></goals>
             <configuration>
-              <release>8</release>
+              <!--<release>8</release>-->
+              <source>1.8</source>
+              <target>1.8</target>
               <compileSourceRoots>
                 <compileSourceRoot>src/main/java</compileSourceRoot>
                 <compileSourceRoot>src/main/java8</compileSourceRoot>
@@ -138,9 +145,6 @@
           </execution>
         </executions>
         <configuration>
-          <configuration>
-            <release>11</release>
-          </configuration>
           <showDeprecation>true</showDeprecation>
         </configuration>
       </plugin>
@@ -170,6 +174,7 @@
                 <goals><goal>jar</goal></goals>
                 <configuration>
                   <additionalparam>--source 11</additionalparam>
+                  <additionalparam>--html5</additionalparam>
                 </configuration>
               </execution>
             </executions>
